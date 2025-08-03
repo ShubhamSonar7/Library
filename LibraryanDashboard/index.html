@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Library Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Only updated <style> and body section shown below, rest is unchanged -->
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #21243d;
+      user-select: none;
+      font-size: 18px;
+    }
+
+    ::selection {
+      background: #a0aec0;
+      color: #fff;
+    }
+
+    .sidebar svg {
+      stroke: #475569;
+    }
+
+    .sidebar a {
+      color: #475569;
+      font-weight: 600;
+      font-size: 1.1rem;
+      line-height: 1.6rem;
+    }
+
+    .sidebar a.active,
+    .sidebar a:hover {
+      color: #b45309;
+    }
+
+    .sidebar a.active::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      height: 1.5rem;
+      width: 3px;
+      background-color: #b45309;
+      border-radius: 4px;
+    }
+
+    .card-icon-total { color: #2563eb; }
+    .card-icon-active { color: #4c7c36; }
+    .card-icon-issued { color: #b45309; }
+    .card-icon-overdue { color: #a33939; }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f3f4f6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 10px;
+      border: 3px solid #f3f4f6;
+    }
+
+    /* Override Tailwind font sizes */
+    .text-xs     { font-size: 1rem !important; }
+    .text-sm     { font-size: 1.1rem !important; }
+    .text-base   { font-size: 1.2rem !important; }
+    .text-lg     { font-size: 1.4rem !important; }
+    .text-xl     { font-size: 1.6rem !important; }
+    .text-2xl    { font-size: 2rem !important; }
+    .text-3xl    { font-size: 2.4rem !important; }
+    .text-4xl    { font-size: 3rem !important; }
+    .text-5xl    { font-size: 3.5rem !important; }
+
+
+    
+.icon-sm {
+  width: 18px;
+  height: 18px;
+}
+
+
+
+
+
+    
+
+
+  </style>
+
+</head>
+<body class="flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="sidebar flex flex-col bg-white w-64 border-r border-gray-200 p-6 relative">
+    <!-- Logo block -->
+    <div class="mb-12 flex items-center gap-2 select-text">
+      <div aria-hidden="true" class="p-2 rounded-md border border-gray-300 text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9v11a1 1 0 001 1h13v-6a2 2 0 00-2-2H6a2 2 0 01-3-2V9z"></path><path d="M8 8V5a1 1 0 011-1h6a1 1 0 011 1v3"></path></svg>
+      </div>
+      <div>
+        <h1 class="font-semibold text-gray-800 text-lg leading-tight">Digital Library</h1>
+        <p class="text-sm text-gray-500">Librarian Portal</p>
+      </div>
+    </div>
+
+    <nav class="flex flex-col gap-6 relative">
+  <a href="#" class="tab-link relative flex items-center gap-3 active" data-tab="overview">
+    <i class="fas fa-chart-column text-lg"></i>
+    Overview
+  </a>
+  <a href="#" class="tab-link flex items-center gap-3" data-tab="manage-books">
+    <i class="fas fa-book text-lg"></i>
+    Manage Books
+  </a>
+  <a href="#" class="tab-link flex items-center gap-3" data-tab="add-book">
+    <i class="fas fa-plus text-lg"></i>
+    Add Book
+  </a>
+  <a href="#" class="tab-link flex items-center gap-3" data-tab="students">
+    <i class="fas fa-user-graduate text-lg"></i>
+    Students
+  </a>
+  <a href="#" class="tab-link flex items-center gap-3" data-tab="activity">
+    <i class="fas fa-list-check text-lg"></i>
+    Activity
+  </a>
+</nav>
+
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 flex flex-col overflow-y-auto p-8">
+
+    <!-- Header top bar -->
+    <header class="flex justify-between items-center mb-12 select-text">
+      <div>
+        <h2 class="text-xl font-bold leading-tight text-gray-900">Library Analytics</h2>
+        <p class="text-gray-600">Comprehensive overview of library operations and statistics</p>
+      </div>
+      <div class="flex items-center gap-6 text-sm select-text">
+        <button aria-label="Notifications" title="Notifications" class="relative group text-gray-600 hover:text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9"></path></svg>
+          <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
+        </button>
+        <div class="text-right select-text">
+          <p class="font-semibold text-gray-900 leading-5">sonar shubham</p>
+          <p class="text-xs text-gray-600 leading-4">Librarian</p>
+        </div>
+        <button aria-label="Logout" title="Logout" class="text-gray-600 hover:text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-6 0v-1m6-8V7a3 3 0 00-6 0v1"></path></svg>
+        </button>
+      </div>
+    </header>
+
+
+
+
+
+
+
+
+
+<main class="flex-1 flex flex-col overflow-y-auto p-8">
+
+  <section data-content="overview" class="tab-section">
+    <!-- Cards grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-blue-400 card-icon-total">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2H6a3 3 0 00-3 3v14a3 3 0 003 3h12a3 3 0 003-3V5a3 3 0 00-3-3z"></path><path d="M6 12h12"></path></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Total Books</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-gray-500 mt-1">+3 this month</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-green-600 card-icon-active">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-3-3.87"></path><path d="M9 7a4 4 0 014-4"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Active Students</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-gray-500 mt-1">+2 this week</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-yellow-700 card-icon-issued">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 11l4-4m0 0l-4-4m4 4H8m8 4v5a2 2 0 01-2 2H8"></path></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Books Issued</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-red-600 mt-1">12% increase</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-red-600 card-icon-overdue">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Overdue Books</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-red-600 mt-1">Needs attention</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Monthly trends and categories flex container -->
+    <section class="flex flex-col lg:flex-row gap-12 max-w-6xl w-full select-text">
+      
+      <!-- Monthly Trends -->
+      <section class="flex-1">
+        <h3 class="text-lg font-semibold text-gray-900 mb-6">Monthly Trends</h3>
+        <div class="space-y-5">
+          <TrendItem month="Jan" issued="45" returned="42" />
+          <TrendItem month="Feb" issued="52" returned="48" />
+          <TrendItem month="Mar" issued="38" returned="41" />
+          <TrendItem month="Apr" issued="61" returned="55" />
+          <TrendItem month="May" issued="47" returned="50" />
+        </div>
+      </section>
+
+      <!-- Popular Categories -->
+      <section class="flex-1">
+        <h3 class="text-lg font-semibold text-gray-900 mb-6">Popular Categories</h3>
+        <div class="space-y-6">
+          <CategoryItem category="Computer Science" count="15" color="bg-orange-500" />
+          <CategoryItem category="Mathematics" count="12" color="bg-orange-400" />
+          <CategoryItem category="Physics" count="8" color="bg-orange-300" />
+          <CategoryItem category="Literature" count="6" color="bg-orange-200" />
+        </div>
+      </section>
+    </section>
+  </section>
+
+
+
+  <section data-content="manage-books" class="tab-section hidden p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h2 class="text-2xl font-semibold text-gray-800">Book Management</h2>
+    <p class="text-gray-500 text-sm">Manage your library’s book collection</p>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
+    <div class="flex-1">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search by title, author, or ISBN..."
+          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+        />
+        <span class="absolute right-3 top-2.5 text-gray-400">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+    <div>
+      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+        <i class="fas fa-filter text-gray-500"></i>
+        All Categories
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats with box-shadow -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Total Books</p>
+      <p class="text-2xl font-bold text-gray-800">0</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Available</p>
+      <p class="text-2xl font-bold text-green-600">0</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Issued</p>
+      <p class="text-2xl font-bold text-blue-600">0</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Categories</p>
+      <p class="text-2xl font-bold text-purple-600">0</p>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="text-center mt-10">
+    <i class="fas fa-book text-4xl text-gray-300 mb-4"></i>
+    <p class="text-gray-500">0 books found</p>
+  </div>
+  
+</section>
+
+
+
+
+<section data-content="add-book" class="tab-section hidden p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h2 class="text-2xl font-semibold text-gray-800">Add New Book</h2>
+    <p class="text-gray-500 text-sm">Add a new book to your library collection</p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <h3 class="text-lg font-semibold text-gray-700 mb-4">Basic Information</h3>
+
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Title -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Title *</label>
+        <input
+          type="text"
+          placeholder="Enter book title"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        />
+      </div>
+
+      <!-- Author -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Author *</label>
+        <input
+          type="text"
+          placeholder="Enter author name"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        />
+      </div>
+
+      <!-- ISBN -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">ISBN *</label>
+        <input
+          type="text"
+          placeholder="Enter ISBN"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        />
+      </div>
+
+      <!-- Category -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Category *</label>
+        <select
+          class="w-full border border-gray-300 rounded-md px-4 py-2 bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        >
+          <option>Select a category</option>
+          <option>Science</option>
+          <option>History</option>
+          <option>Technology</option>
+        </select>
+      </div>
+
+      <!-- Total Copies -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Total Copies</label>
+        <input
+          type="number"
+          value="1"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-gray-600 mb-1">Description</label>
+        <textarea
+          rows="3"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          placeholder="Enter book description..."
+        ></textarea>
+      </div>
+
+      <!-- Files Upload Section -->
+<!-- Files Upload Section -->
+<div class="md:col-span-2 mt-6">
+  <label class="block text-sm font-medium text-gray-700 mb-2">Files</label>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Cover Image Upload -->
+    <div>
+      <label for="coverImage" class="block text-sm font-semibold text-gray-700 mb-2">Cover Image</label>
+      <label for="coverImage"
+        class="h-40 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center text-gray-500 text-sm cursor-pointer hover:border-gray-400 transition">
+        <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 16v-4m0 0V8m0 4h4m-4 0H8m13 4V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h6l2 2 2-2h4a2 2 0 002-2z" />
+        </svg>
+        <p>Drag & drop or click to upload cover image</p>
+        <input type="file" id="coverImage" name="coverImage" class="hidden" accept="image/*">
+      </label>
+    </div>
+
+    <!-- PDF Upload -->
+    <div>
+      <label for="pdfFile" class="block text-sm font-semibold text-gray-700 mb-2">PDF File</label>
+      <label for="pdfFile"
+        class="h-40 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center text-gray-500 text-sm cursor-pointer hover:border-gray-400 transition">
+        <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 4v16m8-8H4" />
+        </svg>
+        <p>Drag & drop PDF file here</p>
+        <p class="text-xs text-gray-400">(PDF files only)</p>
+        <input type="file" id="pdfFile" name="pdfFile" class="hidden" accept="application/pdf">
+      </label>
+    </div>
+
+  </div>
+</div>
+
+
+
+    
+      <!-- Submit and Reset Buttons -->
+<div class="md:col-span-2 flex justify-end items-center gap-4 mt-4">
+  <!-- Reset Button -->
+  <button type="reset" class="flex items-center text-sm text-gray-600 hover:text-gray-800">
+    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+    Reset
+  </button>
+
+  <!-- Add Book Button -->
+  <button type="submit"
+    class="flex items-center bg-orange-600 text-white px-5 py-2 rounded-md hover:bg-orange-700 transition text-sm font-medium">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M12 4v16m8-8H4" />
+    </svg>
+    Add Book
+  </button>
+</div>
+
+    </form>
+  </div>
+</section>
+
+
+ 
+<section data-content="students" class="tab-section hidden p-6">
+  <div class="mb-6">
+    <h2 class="text-2xl font-semibold text-gray-800">Student Management</h2>
+    <p class="text-gray-500 text-sm">Monitor student activities and book loans</p>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
+    <div class="flex-1">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search by title, author, or ISBN..."
+          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+        />
+        <span class="absolute right-3 top-2.5 text-gray-400">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+    
+
+    <!-- Total Students -->
+    <article class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
+      <div class="p-3 rounded-md border border-green-600 card-icon-active">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 00-3-3.87"></path>
+          <path d="M9 7a4 4 0 014-4"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <p class="text-sm font-semibold text-gray-800">Total Students</p>
+      <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+    </article>
+
+    <!-- Active Loans -->
+    <article class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
+      <div class="p-3 rounded-md border border-blue-400 card-icon-total">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M18 2H6a3 3 0 00-3 3v14a3 3 0 003 3h12a3 3 0 003-3V5a3 3 0 00-3-3z"></path>
+          <path d="M6 12h12"></path>
+        </svg>
+      </div>
+      <p class="text-sm font-semibold text-gray-800">Active Loans</p>
+      <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+    </article>
+
+    <!-- Overdue Books -->
+    <article class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
+      <div class="p-3 rounded-md border border-red-600 card-icon-overdue">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 6v6l4 2"></path>
+        </svg>
+      </div>
+      <p class="text-sm font-semibold text-gray-800">Overdue Books</p>
+      <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+    </article>
+    
+  </section>
+</section>
+
+
+<section data-content="activity" class="tab-section hidden">
+  
+  <div class="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm" style="display: flex;justify-content: space-between;">
+    <div>
+      <i class="fas fa-filter text-gray-500"></i>
+    </div>
+    <div>
+      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+       <b>All activation</b> 
+      </button>
+    </div>
+    <div>
+      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+       <b>Book added</b> 
+      </button>
+    </div>
+    <div>
+      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+       <b>Book issued</b> 
+      </button>
+    </div>
+    <div>
+      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+       <b>Book returned</b> 
+      </button>
+    </div>
+    <div>
+      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+       <b>Overdue Books</b> 
+      </button>
+    </div>
+    
+      
+  </div>
+    <!-- Cards grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-blue-400 card-icon-total">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2H6a3 3 0 00-3 3v14a3 3 0 003 3h12a3 3 0 003-3V5a3 3 0 00-3-3z"></path><path d="M6 12h12"></path></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Total Books</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-gray-500 mt-1">+3 this month</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-green-600 card-icon-active">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-3-3.87"></path><path d="M9 7a4 4 0 014-4"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Active Students</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-gray-500 mt-1">+2 this week</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-yellow-700 card-icon-issued">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 11l4-4m0 0l-4-4m4 4H8m8 4v5a2 2 0 01-2 2H8"></path></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Books Issued</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-red-600 mt-1">12% increase</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
+        <div class="p-3 rounded-md border border-red-600 card-icon-overdue">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Overdue Books</p>
+          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          <p class="text-xs text-red-600 mt-1">Needs attention</p>
+        </div>
+      </article>
+
+    </section>
+</section>
+
+
+
+
+
+
+
+  
+
+   
+
+ 
+
+
+
+
+  <!-- Add other tab sections here (e.g., add-book, students, etc.) -->
+</main>
+
+
+
+
+    
+
+  <script>
+    // Render Monthly Trends bars dynamically
+    function TrendItem({month, issued, returned}) {
+      // Calculate relative bar widths for visualization: max ~ 65
+      const maxVal = 65;
+      const issuedWidth = (issued / maxVal)*100;
+      const returnedWidth = (returned / maxVal)*100;
+      return `
+      <div class="flex items-center justify-between text-sm">
+        <div class="w-12 font-medium text-gray-800">${month}</div>
+        <div class="flex-1 flex items-center gap-3 px-3">
+          <div class="flex-1 bg-blue-400 h-2 rounded" style="width:${issuedWidth}%"></div>
+          <span class="min-w-[45px] text-gray-500">${issued} issued</span>
+          <div class="flex-1 bg-green-600 h-2 rounded" style="width:${returnedWidth}%"></div>
+          <span class="min-w-[50px] text-gray-500">${returned} returned</span>
+        </div>
+      </div>
+      `;
+    }
+
+    function CategoryItem({category, count, color}) {
+      // max count 15
+      const maxCount = 15;
+      const barWidth = (count / maxCount) * 100;
+      return `
+      <div class="flex items-center justify-between gap-3">
+        <div class="text-gray-700">${category}</div>
+        <div class="flex-1 bg-gray-200 h-3 rounded-full relative">
+          <div class="${color} absolute top-0 left-0 h-3 rounded-full" style="width: ${barWidth}%"></div>
+        </div>
+        <div class="w-7 font-semibold text-gray-700">${count}</div>
+      </div>
+      `;
+    }
+
+    // Render dynamic lists into the containers
+    document.addEventListener("DOMContentLoaded", () => {
+      // Monthly Trends container
+      const monthlyTrendsContainer = document.querySelector('section > section:first-child > div.space-y-5');
+      const monthlyData = [
+        {month: "Jan", issued:45, returned:42},
+        {month: "Feb", issued:52, returned:48},
+        {month: "Mar", issued:38, returned:41},
+        {month: "Apr", issued:61, returned:55},
+        {month: "May", issued:47, returned:50},
+      ];
+      monthlyTrendsContainer.innerHTML = monthlyData.map(data => TrendItem(data)).join("");
+
+      // Popular Categories container
+      const popularCategoriesContainer = document.querySelector('section > section:nth-child(2) > div.space-y-6');
+      const categoriesData = [
+        {category:"Computer Science", count:15, color:"bg-orange-500"},
+        {category:"Mathematics", count:12, color:"bg-orange-400"},
+        {category:"Physics", count:8, color:"bg-orange-300"},
+        {category:"Literature", count:6, color:"bg-orange-200"},
+      ];
+      popularCategoriesContainer.innerHTML = categoriesData.map(data => CategoryItem(data)).join("");
+    });
+
+
+
+
+
+    document.querySelectorAll('.tab-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Remove active state from all links
+      document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
+
+      // Add active state to clicked link
+      this.classList.add('active');
+
+      const tab = this.getAttribute('data-tab');
+
+      // Hide all sections
+      document.querySelectorAll('.tab-section').forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      // Show selected section
+      const target = document.querySelector(`[data-content="${tab}"]`);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+    });
+  });
+  </script>
+</main>
+
+</body>
+</html>
+
