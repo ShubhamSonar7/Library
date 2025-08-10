@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Digital Library Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Only updated <style> and body section shown below, rest is unchanged -->
 
-<style>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
     body {
@@ -42,7 +44,7 @@
     }
 
     .sidebar a.active::before {
-      content: "";
+
       position: absolute;
       left: 0;
       top: 8px;
@@ -52,17 +54,30 @@
       border-radius: 4px;
     }
 
-    .card-icon-total { color: #2563eb; }
-    .card-icon-active { color: #4c7c36; }
-    .card-icon-issued { color: #b45309; }
-    .card-icon-overdue { color: #a33939; }
+    .card-icon-total {
+      color: #2563eb;
+    }
+
+    .card-icon-active {
+      color: #4c7c36;
+    }
+
+    .card-icon-issued {
+      color: #b45309;
+    }
+
+    .card-icon-overdue {
+      color: #a33939;
+    }
 
     ::-webkit-scrollbar {
       width: 10px;
     }
+
     ::-webkit-scrollbar-track {
       background: #f3f4f6;
     }
+
     ::-webkit-scrollbar-thumb {
       background-color: #cbd5e1;
       border-radius: 10px;
@@ -70,70 +85,116 @@
     }
 
     /* Override Tailwind font sizes */
-    .text-xs     { font-size: 1rem !important; }
-    .text-sm     { font-size: 1.1rem !important; }
-    .text-base   { font-size: 1.2rem !important; }
-    .text-lg     { font-size: 1.4rem !important; }
-    .text-xl     { font-size: 1.6rem !important; }
-    .text-2xl    { font-size: 2rem !important; }
-    .text-3xl    { font-size: 2.4rem !important; }
-    .text-4xl    { font-size: 3rem !important; }
-    .text-5xl    { font-size: 3.5rem !important; }
+    .text-xs {
+      font-size: 1rem !important;
+    }
+
+    .text-sm {
+      font-size: 1.1rem !important;
+    }
+
+    .text-base {
+      font-size: 1.2rem !important;
+    }
+
+    .text-lg {
+      font-size: 1.4rem !important;
+    }
+
+    .text-xl {
+      font-size: 1.6rem !important;
+    }
+
+    .text-2xl {
+      font-size: 2rem !important;
+    }
+
+    .text-3xl {
+      font-size: 2.4rem !important;
+    }
+
+    .text-4xl {
+      font-size: 3rem !important;
+    }
+
+    .text-5xl {
+      font-size: 3.5rem !important;
+    }
 
 
-    
-.icon-sm {
-  width: 18px;
-  height: 18px;
-}
 
-
-
-
-
-    
-
-
+    .icon-sm {
+      width: 18px;
+      height: 18px;
+    }
   </style>
 
 </head>
+
 <body class="flex h-screen overflow-hidden">
+
+
 
   <!-- Sidebar -->
   <aside class="sidebar flex flex-col bg-white w-64 border-r border-gray-200 p-6 relative">
     <!-- Logo block -->
     <div class="mb-12 flex items-center gap-2 select-text">
       <div aria-hidden="true" class="p-2 rounded-md border border-gray-300 text-gray-700">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9v11a1 1 0 001 1h13v-6a2 2 0 00-2-2H6a2 2 0 01-3-2V9z"></path><path d="M8 8V5a1 1 0 011-1h6a1 1 0 011 1v3"></path></svg>
+        <div
+          class="h-10 w-10 bg-gradient-to-r from-white-600 to-indigo-600 rounded-lg flex items-center justify-center">
+          <div
+            class="h-10 w-10 bg-gradient-to-r from-white-600 to-indigo-600 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-book-open h-6 w-6 text-white">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+        </div>
       </div>
       <div>
         <h1 class="font-semibold text-gray-800 text-lg leading-tight">Digital Library</h1>
-        <p class="text-sm text-gray-500">Librarian Portal</p>
+        <p class="text-sm text-gray-500">Student Portals</p>
       </div>
     </div>
 
     <nav class="flex flex-col gap-6 relative">
-  <a href="#" class="tab-link relative flex items-center gap-3 active" data-tab="overview">
-    <i class="fas fa-chart-column text-lg"></i>
-    Overview
-  </a>
-  <a href="#" class="tab-link flex items-center gap-3" data-tab="manage-books">
-    <i class="fas fa-book text-lg"></i>
-    Manage Books
-  </a>
-  <a href="#" class="tab-link flex items-center gap-3" data-tab="add-book">
-    <i class="fas fa-plus text-lg"></i>
-    Add Book
-  </a>
-  <a href="#" class="tab-link flex items-center gap-3" data-tab="students">
-    <i class="fas fa-user-graduate text-lg"></i>
-    Students
-  </a>
-  <a href="#" class="tab-link flex items-center gap-3" data-tab="activity">
-    <i class="fas fa-list-check text-lg"></i>
-    Activity
-  </a>
-</nav>
+      <a class="tab-link relative flex items-center gap-3 active" data-tab="BrowseBook">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-search mr-3 h-5 w-5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        Browse Books
+      </a>
+
+      <a href="#" class="tab-link flex items-center gap-3" data-tab="MyBooks">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-book mr-3 h-5 w-5">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-user mr-3 h-5 w-5">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        My Books
+      </a>
+
+      <a href="#" class="tab-link flex items-center gap-3" data-tab="Profile">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-user mr-3 h-5 w-5">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        Profile
+      </a>
+
+    </nav>
 
   </aside>
 
@@ -141,23 +202,32 @@
   <main class="flex-1 flex flex-col overflow-y-auto p-8">
 
     <!-- Header top bar -->
-    <header class="flex justify-between items-center mb-12 select-text">
+    <header class="flex justify-between items-center mb-12 select-text" style="display: flex;justify-content: end;">
+
       <div>
-        <h2 class="text-xl font-bold leading-tight text-gray-900">Library Analytics</h2>
-        <p class="text-gray-600">Comprehensive overview of library operations and statistics</p>
-      </div>
-      <div class="flex items-center gap-6 text-sm select-text">
-        <button aria-label="Notifications" title="Notifications" class="relative group text-gray-600 hover:text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9"></path></svg>
-          <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
-        </button>
-        <div class="text-right select-text">
-          <p class="font-semibold text-gray-900 leading-5">sonar shubham</p>
-          <p class="text-xs text-gray-600 leading-4">Librarian</p>
+        <div class="flex items-center gap-6 text-sm select-text" style="justify-content: end;">
+          <button aria-label="Notifications" title="Notifications"
+            class="relative group text-gray-600 hover:text-gray-900">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9">
+              </path>
+            </svg>
+            <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
+          </button>
+          <div class="text-right select-text ">
+            <p class="font-semibold text-gray-900 leading-5">Dalal Gopal</p>
+            <p class="text-xs text-gray-600 leading-4">Student ID:</p>
+          </div>
+          <button aria-label="Logout" title="Logout" class="text-gray-600 hover:text-gray-900">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-6 0v-1m6-8V7a3 3 0 00-6 0v1"></path>
+            </svg>
+          </button>
         </div>
-        <button aria-label="Logout" title="Logout" class="text-gray-600 hover:text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-6 0v-1m6-8V7a3 3 0 00-6 0v1"></path></svg>
-        </button>
+
       </div>
     </header>
 
@@ -169,392 +239,466 @@
 
 
 
-<main class="flex-1 flex flex-col overflow-y-auto p-8">
+    <main class="flex-1 flex flex-col overflow-y-auto p-8">
 
-  <section data-content="overview" class="tab-section">
-    <!-- Cards grid -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <section data-content="BrowseBook" class="tab-section ">
+        <div class="mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800">Browse Book
+            <Base>
+            </Base>
+          </h2>
+          <p class="text-gray-500 text-sm">Discover and issue books from our digital library</p>
+        </div>
 
-      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
-        <div class="p-3 rounded-md border border-blue-400 card-icon-total">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2H6a3 3 0 00-3 3v14a3 3 0 003 3h12a3 3 0 003-3V5a3 3 0 00-3-3z"></path><path d="M6 12h12"></path></svg>
+        <div class="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
+          <div class="flex-1">
+            <div class="relative">
+              <input type="text" placeholder="Search by title, author, or ISBN..."
+                class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+              <span class="absolute right-3 top-2.5 text-gray-400">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+          <div>
+            <button
+              class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+              <i class="fas fa-filter text-gray-500"></i>
+              All Categories
+            </button>
+          </div>
         </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-800 mb-1">Total Books</p>
-          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-          <p class="text-xs text-gray-500 mt-1">+3 this month</p>
-        </div>
-      </article>
 
-      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
-        <div class="p-3 rounded-md border border-green-600 card-icon-active">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-3-3.87"></path><path d="M9 7a4 4 0 014-4"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-800 mb-1">Active Students</p>
-          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-          <p class="text-xs text-gray-500 mt-1">+2 this week</p>
-        </div>
-      </article>
 
-      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
-        <div class="p-3 rounded-md border border-yellow-700 card-icon-issued">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 11l4-4m0 0l-4-4m4 4H8m8 4v5a2 2 0 01-2 2H8"></path></svg>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-800 mb-1">Books Issued</p>
-          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-          <p class="text-xs text-red-600 mt-1">12% increase</p>
-        </div>
-      </article>
 
-      <article class="bg-white rounded-lg shadow px-6 py-5 flex items-center gap-4">
-        <div class="p-3 rounded-md border border-red-600 card-icon-overdue">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-800 mb-1">Overdue Books</p>
-          <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-          <p class="text-xs text-red-600 mt-1">Needs attention</p>
-        </div>
-      </article>
-    </section>
 
-    <!-- Monthly trends and categories flex container -->
-    <section class="flex flex-col lg:flex-row gap-12 max-w-6xl w-full select-text">
-      
-      <!-- Monthly Trends -->
-      <section class="flex-1">
-        <h3 class="text-lg font-semibold text-gray-900 mb-6">Monthly Trends</h3>
-        <div class="space-y-5">
-          <TrendItem month="Jan" issued="45" returned="42" />
-          <TrendItem month="Feb" issued="52" returned="48" />
-          <TrendItem month="Mar" issued="38" returned="41" />
-          <TrendItem month="Apr" issued="61" returned="55" />
-          <TrendItem month="May" issued="47" returned="50" />
+        <div style="display: flex;" width="80%">
+          <div
+            class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-200 group">
+            <div class="relative"><img
+                src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg"
+                alt="Introduction to Computer Science"
+                class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="absolute bottom-4 left-4 right-4">
+                  <div class="flex space-x-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="mb-3">
+                <h3
+                  class="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
+                  Introduction to Computer Science</h3>
+                <p class="text-sm text-gray-600 mt-1">by Dr. Sarah Johnson</p>
+              </div>
+              <div class="space-y-2 text-sm text-gray-500 mb-4">
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-hash h-4 w-4 mr-2">
+                    <line x1="4" x2="20" y1="9" y2="9"></line>
+                    <line x1="4" x2="20" y1="15" y2="15"></line>
+                    <line x1="10" x2="8" y1="3" y2="21"></line>
+                    <line x1="16" x2="14" y1="3" y2="21"></line>
+                  </svg><span>ISBN: 978-0123456789</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-book h-4 w-4 mr-2">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                  </svg><span>Computer Science</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4 mr-2">
+                    <path d="M8 2v4"></path>
+                    <path d="M16 2v4"></path>
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                  </svg><span>Added: 3/8/2025</span></div>
+              </div>
+              <p class="text-sm text-gray-600 line-clamp-3 mb-4">A comprehensive introduction to computer science
+                fundamentals.</p>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-4 text-sm"><span
+                    class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Available</span><span
+                    class="text-gray-600">5/5 copies</span></div>
+              </div><button
+                class="w-full py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ">Issue
+                Book</button>
+            </div>
+          </div>
+
+
+
+          <div
+            class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-200 group">
+            <div class="relative"><img
+                src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg"
+                alt="Introduction to Computer Science"
+                class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="absolute bottom-4 left-4 right-4">
+                  <div class="flex space-x-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="mb-3">
+                <h3
+                  class="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
+                  Introduction to Computer Science</h3>
+                <p class="text-sm text-gray-600 mt-1">by Dr. Sarah Johnson</p>
+              </div>
+              <div class="space-y-2 text-sm text-gray-500 mb-4">
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-hash h-4 w-4 mr-2">
+                    <line x1="4" x2="20" y1="9" y2="9"></line>
+                    <line x1="4" x2="20" y1="15" y2="15"></line>
+                    <line x1="10" x2="8" y1="3" y2="21"></line>
+                    <line x1="16" x2="14" y1="3" y2="21"></line>
+                  </svg><span>ISBN: 978-0123456789</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-book h-4 w-4 mr-2">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                  </svg><span>Computer Science</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4 mr-2">
+                    <path d="M8 2v4"></path>
+                    <path d="M16 2v4"></path>
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                  </svg><span>Added: 3/8/2025</span></div>
+              </div>
+              <p class="text-sm text-gray-600 line-clamp-3 mb-4">A comprehensive introduction to computer science
+                fundamentals.</p>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-4 text-sm"><span
+                    class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Available</span><span
+                    class="text-gray-600">5/5 copies</span></div>
+              </div><button
+                class="w-full py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ">Issue
+                Book</button>
+            </div>
+          </div>
+
+
+
+          <div
+            class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-200 group">
+            <div class="relative"><img
+                src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg"
+                alt="Introduction to Computer Science"
+                class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="absolute bottom-4 left-4 right-4">
+                  <div class="flex space-x-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="mb-3">
+                <h3
+                  class="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
+                  Introduction to Computer Science</h3>
+                <p class="text-sm text-gray-600 mt-1">by Dr. Sarah Johnson</p>
+              </div>
+              <div class="space-y-2 text-sm text-gray-500 mb-4">
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-hash h-4 w-4 mr-2">
+                    <line x1="4" x2="20" y1="9" y2="9"></line>
+                    <line x1="4" x2="20" y1="15" y2="15"></line>
+                    <line x1="10" x2="8" y1="3" y2="21"></line>
+                    <line x1="16" x2="14" y1="3" y2="21"></line>
+                  </svg><span>ISBN: 978-0123456789</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-book h-4 w-4 mr-2">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                  </svg><span>Computer Science</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4 mr-2">
+                    <path d="M8 2v4"></path>
+                    <path d="M16 2v4"></path>
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                  </svg><span>Added: 3/8/2025</span></div>
+              </div>
+              <p class="text-sm text-gray-600 line-clamp-3 mb-4">A comprehensive introduction to computer science
+                fundamentals.</p>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-4 text-sm"><span
+                    class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Available</span><span
+                    class="text-gray-600">5/5 copies</span></div>
+              </div><button
+                class="w-full py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ">Issue
+                Book</button>
+            </div>
+          </div>
         </div>
+
+
+
+
       </section>
 
-      <!-- Popular Categories -->
-      <section class="flex-1">
-        <h3 class="text-lg font-semibold text-gray-900 mb-6">Popular Categories</h3>
-        <div class="space-y-6">
-          <CategoryItem category="Computer Science" count="15" color="bg-orange-500" />
-          <CategoryItem category="Mathematics" count="12" color="bg-orange-400" />
-          <CategoryItem category="Physics" count="8" color="bg-orange-300" />
-          <CategoryItem category="Literature" count="6" color="bg-orange-200" />
+
+
+
+
+      <section data-content="MyBooks" class="tab-section hidden p-6">
+        <div class="mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800">My Issued Books</h2>
+          <p class="text-gray-500 text-sm">Track your borrowed books and due dates</p>
         </div>
+
+
+
+        <!-- Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+
+          <!-- Total Students -->
+          <article
+            class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
+            <div class="p-3 rounded-md border border-green-600 card-icon-active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-book-open h-8 w-8 text-blue-600">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-semibold text-gray-800">Total Issued</p>
+            <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          </article>
+
+          <!-- Active Loans -->
+          <article
+            class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
+            <div class="p-3 rounded-md border border-blue-400 card-icon-total">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-clock h-8 w-8 text-orange-600">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <p class="text-sm font-semibold text-gray-800">Due Soon</p>
+            <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          </article>
+
+          <!-- Overdue Books -->
+          <article
+            class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
+            <div class="p-3 rounded-md border border-red-600 card-icon-overdue">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-calendar h-8 w-8 text-red-600">
+                <path d="M8 2v4"></path>
+                <path d="M16 2v4"></path>
+                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                <path d="M3 10h18"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-semibold text-gray-800">Overdue</p>
+            <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
+          </article>
+
+        </section>
+
+        <div class="text-center py-12"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="lucide lucide-book-open mx-auto h-12 w-12 text-gray-400">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <h3 class="mt-2 text-lg font-medium text-gray-900">No issued books</h3>
+          <p class="mt-1 text-gray-500">You haven't issued any books yet. Browse our catalog to get started!</p><a
+            class="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            href="/student" data-discover="true">Browse Books</a>
+
+
+
+
+
+          <div class="p-6 hover:bg-gray-50 transition-colors duration-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4"><img
+                  src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg"
+                  alt="Introduction to Computer Science" class="h-16 w-12 object-cover rounded shadow-sm">
+                <div class="flex-1 min-w-0">
+                  <h4 class="text-lg font-medium text-gray-900 truncate">Introduction to Computer Science</h4>
+                  <p class="text-sm text-gray-500">by Dr. Sarah Johnson</p>
+                  <p class="text-xs text-gray-400">ISBN: 978-0123456789</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="text-right">
+                  <p class="text-sm text-gray-500">Issued on</p>
+                  <p class="text-sm font-medium text-gray-900">3/8/2025</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-gray-500">Due date</p>
+                  <p class="text-sm font-medium text-gray-900">10/8/2025</p>
+                </div>
+                <div class="flex flex-col items-end space-y-2"><span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-blue-600 bg-blue-50">6
+                    days left</span><a
+                    class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                    href="/read/1" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" class="lucide lucide-eye h-3 w-3 mr-1">
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>Read</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
       </section>
-    </section>
-  </section>
 
 
 
-  <section data-content="manage-books" class="tab-section hidden p-6">
-  <!-- Header -->
-  <div class="mb-6">
-    <h2 class="text-2xl font-semibold text-gray-800">Book Management</h2>
-    <p class="text-gray-500 text-sm">Manage your library’s book collection</p>
-  </div>
-
-  <!-- Search and Filter -->
-  <div class="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
-    <div class="flex-1">
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="Search by title, author, or ISBN..."
-          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-        />
-        <span class="absolute right-3 top-2.5 text-gray-400">
-          <i class="fas fa-search"></i>
-        </span>
-      </div>
-    </div>
-    <div>
-      <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100">
-        <i class="fas fa-filter text-gray-500"></i>
-        All Categories
-      </button>
-    </div>
-  </div>
-
-  <!-- Stats with box-shadow -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-    <div class="bg-white p-4 rounded-lg shadow text-center">
-      <p class="text-sm text-gray-500">Total Books</p>
-      <p class="text-2xl font-bold text-gray-800">0</p>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow text-center">
-      <p class="text-sm text-gray-500">Available</p>
-      <p class="text-2xl font-bold text-green-600">0</p>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow text-center">
-      <p class="text-sm text-gray-500">Issued</p>
-      <p class="text-2xl font-bold text-blue-600">0</p>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow text-center">
-      <p class="text-sm text-gray-500">Categories</p>
-      <p class="text-2xl font-bold text-purple-600">0</p>
-    </div>
-  </div>
-
-  <!-- Empty State -->
-  <div class="text-center mt-10">
-    <i class="fas fa-book text-4xl text-gray-300 mb-4"></i>
-    <p class="text-gray-500">0 books found</p>
-  </div>
-</section>
+      <section data-content="Profile" class="tab-section hidden p-6">
+        <div class="mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800">My Profile</h2>
+          <p class="text-gray-500 text-sm">Manage your account information and library activity</p>
+        </div>
 
 
 
-
-<section data-content="add-book" class="tab-section hidden p-6">
-  <!-- Header -->
-  <div class="mb-6">
-    <h2 class="text-2xl font-semibold text-gray-800">Add New Book</h2>
-    <p class="text-gray-500 text-sm">Add a new book to your library collection</p>
-  </div>
-
-  <!-- Form Card -->
-  <div class="bg-white rounded-lg shadow p-6">
-    <h3 class="text-lg font-semibold text-gray-700 mb-4">Basic Information</h3>
-
-    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Title -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600 mb-1">Title *</label>
-        <input
-          type="text"
-          placeholder="Enter book title"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
-      </div>
-
-      <!-- Author -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600 mb-1">Author *</label>
-        <input
-          type="text"
-          placeholder="Enter author name"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
-      </div>
-
-      <!-- ISBN -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600 mb-1">ISBN *</label>
-        <input
-          type="text"
-          placeholder="Enter ISBN"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
-      </div>
-
-      <!-- Category -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600 mb-1">Category *</label>
-        <select
-          class="w-full border border-gray-300 rounded-md px-4 py-2 bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        >
-          <option>Select a category</option>
-          <option>Science</option>
-          <option>History</option>
-          <option>Technology</option>
-        </select>
-      </div>
-
-      <!-- Total Copies -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600 mb-1">Total Copies</label>
-        <input
-          type="number"
-          value="1"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
-      </div>
-
-      <!-- Description -->
-      <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-gray-600 mb-1">Description</label>
-        <textarea
-          rows="3"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-          placeholder="Enter book description..."
-        ></textarea>
-      </div>
-
-      <!-- Files Upload Section -->
-<!-- Files Upload Section -->
-<div class="md:col-span-2 mt-6">
-  <label class="block text-sm font-medium text-gray-700 mb-2">Files</label>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-    <!-- Cover Image Upload -->
-    <div>
-      <label for="coverImage" class="block text-sm font-semibold text-gray-700 mb-2">Cover Image</label>
-      <label for="coverImage"
-        class="h-40 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center text-gray-500 text-sm cursor-pointer hover:border-gray-400 transition">
-        <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 16v-4m0 0V8m0 4h4m-4 0H8m13 4V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h6l2 2 2-2h4a2 2 0 002-2z" />
-        </svg>
-        <p>Drag & drop or click to upload cover image</p>
-        <input type="file" id="coverImage" name="coverImage" class="hidden" accept="image/*">
-      </label>
-    </div>
-
-    <!-- PDF Upload -->
-    <div>
-      <label for="pdfFile" class="block text-sm font-semibold text-gray-700 mb-2">PDF File</label>
-      <label for="pdfFile"
-        class="h-40 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center text-gray-500 text-sm cursor-pointer hover:border-gray-400 transition">
-        <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 4v16m8-8H4" />
-        </svg>
-        <p>Drag & drop PDF file here</p>
-        <p class="text-xs text-gray-400">(PDF files only)</p>
-        <input type="file" id="pdfFile" name="pdfFile" class="hidden" accept="application/pdf">
-      </label>
-    </div>
-
-  </div>
-</div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <!-- Top user info -->
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-blue-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800">gopal dalal</h3>
+              <p class="text-sm text-gray-500">Student</p>
+              <p class="text-sm text-gray-500">Member since: 7/30/2025</p>
+            </div>
+          </div>
+        </div>
 
 
-
-    
-      <!-- Submit and Reset Buttons -->
-<div class="md:col-span-2 flex justify-end items-center gap-4 mt-4">
-  <!-- Reset Button -->
-  <button type="reset" class="flex items-center text-sm text-gray-600 hover:text-gray-800">
-    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-    </svg>
-    Reset
-  </button>
-
-  <!-- Add Book Button -->
-  <button type="submit"
-    class="flex items-center bg-orange-600 text-white px-5 py-2 rounded-md hover:bg-orange-700 transition text-sm font-medium">
-    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round"
-        d="M12 4v16m8-8H4" />
-    </svg>
-    Add Book
-  </button>
-</div>
-
-    </form>
-  </div>
-</section>
+        <br>
 
 
- 
-<section data-content="students" class="tab-section hidden p-6">
-  <div class="mb-6">
-    <h2 class="text-2xl font-semibold text-gray-800">Student Management</h2>
-    <p class="text-gray-500 text-sm">Monitor student activities and book loans</p>
-  </div>
-
-  <!-- Search and Filter -->
-  <div class="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded-md shadow-sm">
-    <div class="flex-1">
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="Search by title, author, or ISBN..."
-          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-        />
-        <span class="absolute right-3 top-2.5 text-gray-400">
-          <i class="fas fa-search"></i>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Cards -->
-  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-    
-
-    <!-- Total Students -->
-    <article class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
-      <div class="p-3 rounded-md border border-green-600 card-icon-active">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <path d="M17 21v-2a4 4 0 00-3-3.87"></path>
-          <path d="M9 7a4 4 0 014-4"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </div>
-      <p class="text-sm font-semibold text-gray-800">Total Students</p>
-      <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-    </article>
-
-    <!-- Active Loans -->
-    <article class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
-      <div class="p-3 rounded-md border border-blue-400 card-icon-total">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <path d="M18 2H6a3 3 0 00-3 3v14a3 3 0 003 3h12a3 3 0 003-3V5a3 3 0 00-3-3z"></path>
-          <path d="M6 12h12"></path>
-        </svg>
-      </div>
-      <p class="text-sm font-semibold text-gray-800">Active Loans</p>
-      <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-    </article>
-
-    <!-- Overdue Books -->
-    <article class="bg-white rounded-lg shadow px-6 py-6 flex flex-col items-center justify-evenly text-center h-40">
-      <div class="p-3 rounded-md border border-red-600 card-icon-overdue">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M12 6v6l4 2"></path>
-        </svg>
-      </div>
-      <p class="text-sm font-semibold text-gray-800">Overdue Books</p>
-      <h3 class="text-2xl font-bold text-gray-900 leading-none">0</h3>
-    </article>
-    
-  </section>
-</section>
-
-
-
-
-
-  
-
-   
-
- 
+        <div style="display: flex;justify-content: space-between;">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+              <!-- Contact Information -->
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">Contact Information</h4><br>
+                <p class="text-sm text-gray-600 mb-1"><strong>Email Address:</strong> shortcircuit430@gmail.com</p><br>
+                <p class="text-sm text-gray-600 mb-1"><strong>Student ID:</strong> 151220</p><br>
+                <p class="text-sm text-gray-600"><strong>Member Since:</strong> 7/30/2025</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">Library Activity</h4><br>
+                <p class="text-sm text-gray-600 mb-1"><strong>Total books issued:</strong> <span
+                    class="text-blue-600">0</span></p><br>
+                <p class="text-sm text-gray-600 mb-1"><strong>Currently issued:</strong> <span
+                    class="text-blue-600">0</span></p><br>
+                <p class="text-sm text-gray-600"><strong>Books returned:</strong> <span class="text-blue-600">0</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
 
 
 
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Recent Activity</h3>
+          <p class="text-gray-500 text-center py-4">No recent activity</p>
+        </div>
 
 
-  <!-- Add other tab sections here (e.g., add-book, students, etc.) -->
-</main>
 
 
 
 
-    
+        <div class="p-6 hover:bg-gray-50 transition-colors duration-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4"><img
+                src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg"
+                alt="Introduction to Computer Science" class="h-16 w-12 object-cover rounded shadow-sm">
+              <div class="flex-1 min-w-0">
+                <h4 class="text-lg font-medium text-gray-900 truncate">Introduction to Computer Science</h4>
+                <p class="text-sm text-gray-500">by Dr. Sarah Johnson</p>
+                <p class="text-xs text-gray-400">ISBN: 978-0123456789</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="text-right">
+                <p class="text-sm text-gray-500">Issued on</p>
+                <p class="text-sm font-medium text-gray-900">3/8/2025</p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-gray-500">Due date</p>
+                <p class="text-sm font-medium text-gray-900">10/8/2025</p>
+              </div>
+              <div class="flex flex-col items-end space-y-2"><span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-blue-600 bg-blue-50">6
+                  days left</span><a
+                  class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                  href="/read/1" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-eye h-3 w-3 mr-1">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>Read</a></div>
+            </div>
+          </div>
+        </div>
 
-  <script>
-    // Render Monthly Trends bars dynamically
-    function TrendItem({month, issued, returned}) {
-      // Calculate relative bar widths for visualization: max ~ 65
-      const maxVal = 65;
-      const issuedWidth = (issued / maxVal)*100;
-      const returnedWidth = (returned / maxVal)*100;
-      return `
+
+      </section>
+
+
+      </section>
+
+
+      <!-- Add other tab sections here (e.g., add-book, students, etc.) -->
+    </main>
+
+
+
+
+
+
+    <script>
+      // Render Monthly Trends bars dynamically
+      function TrendItem({ month, issued, returned }) {
+        // Calculate relative bar widths for visualization: max ~ 65
+        const maxVal = 65;
+        const issuedWidth = (issued / maxVal) * 100;
+        const returnedWidth = (returned / maxVal) * 100;
+        return `
       <div class="flex items-center justify-between text-sm">
         <div class="w-12 font-medium text-gray-800">${month}</div>
         <div class="flex-1 flex items-center gap-3 px-3">
@@ -565,13 +709,13 @@
         </div>
       </div>
       `;
-    }
+      }
 
-    function CategoryItem({category, count, color}) {
-      // max count 15
-      const maxCount = 15;
-      const barWidth = (count / maxCount) * 100;
-      return `
+      function CategoryItem({ category, count, color }) {
+        // max count 15
+        const maxCount = 15;
+        const barWidth = (count / maxCount) * 100;
+        return `
       <div class="flex items-center justify-between gap-3">
         <div class="text-gray-700">${category}</div>
         <div class="flex-1 bg-gray-200 h-3 rounded-full relative">
@@ -580,63 +724,63 @@
         <div class="w-7 font-semibold text-gray-700">${count}</div>
       </div>
       `;
-    }
+      }
 
-    // Render dynamic lists into the containers
-    document.addEventListener("DOMContentLoaded", () => {
-      // Monthly Trends container
-      const monthlyTrendsContainer = document.querySelector('section > section:first-child > div.space-y-5');
-      const monthlyData = [
-        {month: "Jan", issued:45, returned:42},
-        {month: "Feb", issued:52, returned:48},
-        {month: "Mar", issued:38, returned:41},
-        {month: "Apr", issued:61, returned:55},
-        {month: "May", issued:47, returned:50},
-      ];
-      monthlyTrendsContainer.innerHTML = monthlyData.map(data => TrendItem(data)).join("");
+      // Render dynamic lists into the containers
+      document.addEventListener("DOMContentLoaded", () => {
+        // Monthly Trends container
+        const monthlyTrendsContainer = document.querySelector('section > section:first-child > div.space-y-5');
+        const monthlyData = [
+          { month: "Jan", issued: 45, returned: 42 },
+          { month: "Feb", issued: 52, returned: 48 },
+          { month: "Mar", issued: 38, returned: 41 },
+          { month: "Apr", issued: 61, returned: 55 },
+          { month: "May", issued: 47, returned: 50 },
+        ];
+        monthlyTrendsContainer.innerHTML = monthlyData.map(data => TrendItem(data)).join("");
 
-      // Popular Categories container
-      const popularCategoriesContainer = document.querySelector('section > section:nth-child(2) > div.space-y-6');
-      const categoriesData = [
-        {category:"Computer Science", count:15, color:"bg-orange-500"},
-        {category:"Mathematics", count:12, color:"bg-orange-400"},
-        {category:"Physics", count:8, color:"bg-orange-300"},
-        {category:"Literature", count:6, color:"bg-orange-200"},
-      ];
-      popularCategoriesContainer.innerHTML = categoriesData.map(data => CategoryItem(data)).join("");
-    });
-
-
-
-
-
-    document.querySelectorAll('.tab-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      // Remove active state from all links
-      document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
-
-      // Add active state to clicked link
-      this.classList.add('active');
-
-      const tab = this.getAttribute('data-tab');
-
-      // Hide all sections
-      document.querySelectorAll('.tab-section').forEach(section => {
-        section.classList.add('hidden');
+        // Popular Categories container
+        const popularCategoriesContainer = document.querySelector('section > section:nth-child(2) > div.space-y-6');
+        const categoriesData = [
+          { category: "Computer Science", count: 15, color: "bg-orange-500" },
+          { category: "Mathematics", count: 12, color: "bg-orange-400" },
+          { category: "Physics", count: 8, color: "bg-orange-300" },
+          { category: "Literature", count: 6, color: "bg-orange-200" },
+        ];
+        popularCategoriesContainer.innerHTML = categoriesData.map(data => CategoryItem(data)).join("");
       });
 
-      // Show selected section
-      const target = document.querySelector(`[data-content="${tab}"]`);
-      if (target) {
-        target.classList.remove('hidden');
-      }
-    });
-  });
-  </script>
-</main>
+
+
+
+
+      document.querySelectorAll('.tab-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // Remove active state from all links
+          document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
+
+          // Add active state to clicked link
+          this.classList.add('active');
+
+          const tab = this.getAttribute('data-tab');
+
+          // Hide all sections
+          document.querySelectorAll('.tab-section').forEach(section => {
+            section.classList.add('hidden');
+          });
+
+          // Show selected section
+          const target = document.querySelector(`[data-content="${tab}"]`);
+          if (target) {
+            target.classList.remove('hidden');
+          }
+        });
+      });
+    </script>
+  </main>
 
 </body>
-</html>
 
+</html>
